@@ -41,12 +41,12 @@ def config():
     url = "https://brain.com.ua/ukr/Mobilniy_telefon_Apple_iPhone_16_Pro_Max_256GB_Black_Titanium-p1145443.html"
 
     r = requests.get(url, headers=headers, cookies=cookies)
-    try:
-        r.raise_for_status()
-    except requests.HTTPError as e:
-        print(f"Error {e}")
-    soup = BeautifulSoup(r.text, "lxml")
 
+    if r.status_code != 200:
+        print(f"Error: {r.status_code}")
+        return None
+        
+    soup = BeautifulSoup(r.text, "lxml")
     return soup
 
 
